@@ -10,7 +10,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 //mongoose.connect("mongodb://localhost/restfulBlogApp");
-var url = "mongodb+srv://ikjot10:IKJOTd123@yelpcamp-ht5yc.mongodb.net/webdev?retryWrites=true&w=majority"
+var url = process.env.DATABASEURL;
 mongoose.connect(url);
 
 //app congfiguration
@@ -28,12 +28,6 @@ var blogSchema = new mongoose.Schema({
   created: {type: Date, default: Date.now}
 });
 var  Blog = mongoose.model("Blog", blogSchema);
-
-  // Blog.create({
-  //   title: "Test Blog",
-  //   image: "https://images.costco-static.com/ImageDelivery/imageService?profileId=12026539&itemId=100075861-894&recipeName=680",
-  //   body: "Hello This is a blog post"
-  // });
 
 //RESTFUL routes
 app.get("/", function(req, res){
@@ -119,5 +113,5 @@ app.delete("/blogs/:id", function(req, res){
 // });
 
 app.listen(process.env.PORT, process.env.IP, function(){
-   console.log("The YelpCamp Server Has Started!");
+   console.log("The Server Has Started!");
 });
