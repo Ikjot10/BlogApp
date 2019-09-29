@@ -10,7 +10,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
-var url = process.env.DATABASEURL;
+var url = process.env.DATABASEURL || "mongodb://localhost/restfulBlogApp";
 mongoose.connect(url);
 
 //app congfiguration
@@ -97,7 +97,6 @@ app.put("/blogs/:id", function(req, res){
 
 //DELETE route
 app.delete("/blogs/:id", function(req, res){
-  //destroy blogs
   Blog.findByIdAndRemove(req.params.id, function(err){
     if(err){
       res.redirect("/blogs");
